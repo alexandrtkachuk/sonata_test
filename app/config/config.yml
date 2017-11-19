@@ -75,3 +75,37 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts: [admin]
 
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+
+
+sonata_admin:
+    security:
+        handler: sonata.admin.security.handler.acl
+
+        #role_admin: ROLE_USER
+        #role_super_admin: ROLE_ADMIN
+
+        # acl security information
+        information:
+            GUEST:    [VIEW, LIST]
+            STAFF:    [EDIT, LIST, VIEW, CREATE]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
+        #staff_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
+        # permission related to the objects
+        #object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+        object_permissions: [OPERATOR, MASTER, OWNER] #редактировать может только владелец
+
+        acl_user_manager: my_user_manager

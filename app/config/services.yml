@@ -4,6 +4,8 @@ parameters:
     #parameter_name: value
 
 services:
+    security.acl.permission.map:
+          class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services
@@ -39,3 +41,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Category }
         public: true
+
+    admin.blog_post:
+            class: AppBundle\Admin\BlogPostAdmin
+            arguments: [~, AppBundle\Entity\BlogPost, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: Blog post }
+            public: true
