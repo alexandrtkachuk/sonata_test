@@ -39,4 +39,31 @@ class BlogPostAdmin extends AbstractAdmin
         ;
 
     }
+
+    public function prePersist($object)
+    {
+
+        if (method_exists($object, 'setUserId')) {
+
+            $user = $this->getConfigurationPool()->getContainer()
+                ->get('security.token_storage')->getToken()->getUser();
+            $object->setUserId($user->getId());
+        }
+        #*/
+
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->eq($query->getRootAliases()[0] . '.userId', ':userId')
+        );
+
+        $userId = $this->getConfigurationPool()->getContainer()
+            ->get('security.token_storage')->getToken()->getUser()->getId();
+
+        $query->setParameter('userId', $userId);
+        return $query;
+    }
 }

@@ -33,10 +33,10 @@ class UserAclVoter extends AclVoter
     {
 
         if(empty($attributes)) {
-         #   echo "none\n";
+            echo "none ??? \n";
             return self::ACCESS_DENIED;
         }
-        #var_dump($attributes);
+        //var_dump($attributes);
 
         if (!$this->supportsClass(get_class($object))) {
             return self::ACCESS_ABSTAIN;
@@ -46,6 +46,8 @@ class UserAclVoter extends AclVoter
             if ($this->supportsAttribute($attribute) && $object instanceof UserInterface) {
                 if ($object->isSuperAdmin() && !$token->getUser()->isSuperAdmin()) {
                     // deny a non super admin user to edit a super admin user
+                    //echo "none ??? \n";
+
                     return self::ACCESS_DENIED;
                 }
             }

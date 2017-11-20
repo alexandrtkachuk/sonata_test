@@ -7,8 +7,8 @@ security:
 
     role_hierarchy:
 
-        ROLE_ADMIN_BLOG_POST_LIST:
-          - OWNER
+        #ROLE_ADMIN_BLOG_POST_LIST:
+        #  - OWNER
         #  - ROLE_USER
         #  - ROLE_ADMIN
 

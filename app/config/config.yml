@@ -106,6 +106,29 @@ sonata_admin:
 
         # permission related to the objects
         #object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
-        object_permissions: [OPERATOR, MASTER, OWNER] #редактировать может только владелец
+        object_permissions: [OWNER] #редактировать может только владелец
 
         acl_user_manager: my_user_manager
+
+easy_admin:
+    entities:
+        User:
+            class: AppBundle\Entity\User
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: {
+                                                                                      'ROLE_USER': 'ROLE_USER',
+                                                                                      'ROLE_ADMIN': 'ROLE_ADMIN',
+                                                                                      'ROLE_ADMIN_BLOG_POST_STAFF': 'ROLE_ADMIN_BLOG_POST_STAFF',
+                                                                                      'ROLE_ADMIN_BLOG_POST_EDITOR': 'ROLE_ADMIN_BLOG_POST_EDITOR',
+                                                                                      'ROLE_ADMIN_BLOG_POST_ADMIN': 'ROLE_ADMIN_BLOG_POST_ADMIN',
+                                                                                      'ROLE_ADMIN_CATEGORY_STAFF': 'ROLE_ADMIN_CATEGORY_STAFF',
+                                                                                      'ROLE_ADMIN_CATEGORY_EDITOR': 'ROLE_ADMIN_CATEGORY_EDITOR',
+                                                                                      'ROLE_ADMIN_CATEGORY_ADMIN': 'ROLE_ADMIN_CATEGORY_ADMIN'
+                                                                                      } } }

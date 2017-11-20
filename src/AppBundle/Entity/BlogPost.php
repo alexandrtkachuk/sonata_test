@@ -141,7 +141,28 @@ class BlogPost
         return $this->category;
     }
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="userid", type="integer")
+     */
+    private $userId;
 
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
 
 }
 

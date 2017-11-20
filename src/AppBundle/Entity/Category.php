@@ -78,5 +78,35 @@ class Category
     {
         return $this->blogPosts;
     }
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="userid", type="integer")
+     */
+    private $userId;
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
+
+
+
+
+
+
 }
 
